@@ -30,7 +30,7 @@ target_compile_options(MikuPan PRIVATE
 target_link_libraries(MikuPan PRIVATE
     vitaGL
     mathneon
-    vitaShaRK
+    vitashark
     SceShaccCgExt
     taihen_stub
     SceShaccCg_stub
