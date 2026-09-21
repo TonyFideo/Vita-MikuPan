@@ -1,0 +1,33 @@
+name: Vita
+
+on:
+  push:
+    branches: [vita]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    container: vitasdk/vitasdk:2026.08
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: >
+          cmake -S . -B build-vita -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE="$VITASDK/share/vita.toolchain.cmake"
+          -DCMAKE_BUILD_TYPE=Release
+          -DMIKUPAN_VITA=ON
+
+      - name: Build
+        run: cmake --build build-vita
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vita-MikuPan
+          path: build-vita/Vita-MikuPan.vpk
+          if-no-files-found: error
