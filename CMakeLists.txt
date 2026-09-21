@@ -13,6 +13,13 @@ endif()
 
 option(BUILD_EU_VERSION "Build the PAL/EU version data and code paths." OFF)
 
+option(MIKUPAN_VITA "Build the PlayStation Vita port." OFF)
+
+if(MIKUPAN_VITA)
+    include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/mikupan_vita.cmake")
+    return()
+endif()
+
 if(ANDROID)
     set(MIKUPAN_ANDROID_PAGE_SIZE "16384"
             CACHE STRING "Maximum Android ELF page size for native shared libraries.")

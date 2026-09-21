@@ -39,7 +39,7 @@ typedef int s_int;
 /// TODO: CHECK FOR PROPER IMPLEMENTATION OF MODE TI
 //typedef int s_long128 __attribute__ ((mode (TI)));
 typedef int s_long128[4];
-#ifdef _MSC_VER
+#if defined(_MSC_VER) || defined(MIKUPAN_VITA)
 TYPEDEF_ALIGNED(16, struct {
 	uint64_t lo;
 	uint64_t hi;
@@ -50,7 +50,7 @@ typedef unsigned int u_long128 __attribute__ ((mode (TI)));
 
 static inline u_long128 u_long128_from_u64(uint64_t value)
 {
-#ifdef _MSC_VER
+#if defined(_MSC_VER) || defined(MIKUPAN_VITA)
 	u_long128 result = { value, 0 };
 	return result;
 #else
